@@ -1,0 +1,286 @@
+// google fonts
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+
+@import './variables';
+@import './mixins';
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 10px;
+}
+body{
+    min-height: 100vh;
+    background-color:$primary-color;
+    color:white;
+    font-family:$siliguri-font;
+}
+
+.wrapper{
+    max-width: 1200px;
+    padding:0 3rem;
+    margin:0 auto;
+    font-size: 1.5rem;
+
+}
+
+.navbar{
+    padding:3rem 0;
+    position:relative;
+
+    &__top{
+        @include flex(null,space-between);
+
+        &--brand{
+            font-size:2.5rem;
+            text-decoration: none;
+            color:white;
+            position: relative;
+
+            span{
+
+                color:$secondary-color
+            }
+
+            &::before{
+                position: absolute;
+                content:"";
+                top:-4px;
+                height:0.2rem;
+                width:1.5rem;
+                background-color: white;
+            }
+        }
+
+        &--toggler{
+            background-color: transparent;
+            border:none;
+            height:3rem;
+            width:3rem;
+            @include flex(column,space-evenly);
+            cursor: pointer;
+            @include transition;
+            z-index:999;
+
+            &:hover{
+                opacity:0.8
+            }
+
+            .line{
+                background-color: white;
+                height:0.2rem;
+                width:100%;
+                @include transition;
+            }
+
+            &.change .line__1{
+                transform:rotate(45deg) translate(0.3rem , 0.8rem)
+            }
+            &.change .line__2{
+                opacity:0;
+                visibility: hidden;
+            }
+
+            &.change .line__3{
+                transform:rotate(-45deg) translate(0.3rem , -0.8rem);
+
+            }
+
+            @include desktop{
+                display:none
+            }
+
+
+        }
+    }
+
+    &__collapse{
+
+        position: absolute;
+        top:calc(100% - 1rem);
+        left:0;
+        width:100%;
+        overflow:hidden;
+        height:0;
+        @include transition;
+
+        &.show__nav{
+            height:calc(212px + 30px)
+        }
+
+        &--nav{
+
+            background-color: rgb(241, 225, 193);
+            padding:1.5rem;
+            border-radius:0.5rem;
+
+            & li{
+                margin:2rem 0;
+                text-align: center;
+                list-style-type: none;
+
+               & a{
+                    text-decoration: none;
+                    color:rgb(102, 98, 98);
+                    font-size: 1.7rem;
+                    letter-spacing: 1px;
+                    @include transition;
+
+                    &:hover{
+                        color:$secondary-color
+                    }
+
+                    &.active{
+                        color:$secondary-color
+                    }
+                }
+
+
+            }
+            @include desktop{
+                padding:0;
+
+                & li{
+                    margin:0;
+                }
+
+            }
+        }
+
+        @include desktop{
+            position: relative;
+            height: auto !important;
+
+            &--nav{
+                background-color: transparent;
+                @include flex(null,flex-end);
+
+                & li{
+                    @include desktop{
+                        margin-left: 4rem;
+                    }
+
+                    & a{
+
+                        color:white;
+
+                        &:hover{
+                            color:$secondary-color;
+                            opacity:0.8;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+@include desktop{
+    @include flex(null,space-between)
+}
+    
+}
+
+// banner section---
+.banner{
+    @include flex(column,null,center);
+    min-height: 100vh;
+    margin-top: 5rem;
+    &__content{
+        min-height: 50vh;
+        @include flex(column);
+        text-align:center;
+        &--heading{
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            span{
+                color:$secondary-color;
+                font-weight: 300;;
+            }
+        }
+
+        &--para{
+            margin:2rem auto;
+            max-width: 600px;
+            font-size: 1.8rem;
+            line-height:1.6;
+        }
+
+        &--btns{
+            margin-top: 1rem;
+
+            & .btn{
+                border:none;
+                background-color: $secondary-color;
+                border:3px solid $secondary-color;
+                padding:0.8rem 2.2rem;
+                font-size: 1.5rem;
+                text-transform: capitalize;
+                font-family: $siliguri-font;
+                @include transition;
+                cursor: pointer;
+
+                &.btn-white{
+                    margin-right: 1rem;
+                    color:$primary-color;
+
+                    &:hover{
+                        background-color: $primary-color;
+                        color:$secondary-color;
+                    }
+                }
+
+                &.btn-transparent{
+                    color:$secondary-color;
+                    background-color: transparent;
+
+                    &:hover{
+
+                        background-color: $secondary-color;
+                        color:$primary-color;
+                    }
+                }
+            }
+        }
+
+        &--icons{
+            margin: 5rem 0;
+            display:flex;
+
+            & a{
+                display:inline-block;
+                text-decoration: none;
+                width:35px;
+                height:35px;
+                background-color: white;
+                color:$primary-color;
+                border-radius: 3px;
+                @include flex(null);
+                margin:0 0.5rem;
+                @include transition;
+
+                &:hover{
+
+                    color:$secondary-color;
+                    box-shadow: 0 0 6px 5px rgba(0,0,0,0.3);
+                }
+            }
+        }
+        
+    }
+
+    @include desktop{
+        @include flex(row,space-between);
+        margin-top: 0;
+        &__content{
+            text-align: left;
+            margin-right: 3rem;
+            align-items: flex-start;
+        }
+    }
+}
